@@ -19,7 +19,7 @@ Returns a printer.  Prepends `indentStr` to add a level of indentation.
 `truncate` controls whether long log output should be truncated.  This option is
 set on the printer, but can be overriden by `print`.
 
-```
+```squirrel
 PP <- PrettyPrinter();
 ```
 
@@ -29,7 +29,7 @@ Returns a string containing the prettifed, JSON-encoded version of obj.  PLEASE
 NOTE that functions will be omitted from the output, as they are not currently
 supported by the JSON encoder.
 
-```
+```squirrel
 array <- [1,2,3,4,5];
 string <- @"A long,
 
@@ -57,7 +57,7 @@ directly and the output may be truncated.  If `truncate` false, calls
 still be subject to message throttling for very long output.  If `truncate` left
 null, will default to that set in the constructor.
 
-```
+```squirrel
 // Print myData and do not truncate
 PP.print(myData, false)
 ```
@@ -68,7 +68,7 @@ To try it out yourself, add the code in test/TestRunner.class.nut to the bottom
 of your code and comment/uncomment the lines in the `run` function that you
 would like to try.  Then run it with:
 
-```
+```squirrel
 TestRunner().run();
 ```
 
