@@ -2,7 +2,7 @@
 
 This library pretty-prints Squirrel objects.
 
-**To add this library to your project, add** `#require "TrueFix.device.nut:1.0.0"` **to the top of your code.  On the device, this library is dependant on the[JSONEncoder](https://github.com/electricimp/JSONEncoder) library.  If used on the device please also add** `#require "JSONEncoder.class.nut:1.0.0"` **to the top of your device code.**
+**To add this library to your project, add** `#require "PrettyPrinter.class.nut:1.0.0"` **to the top of your code.  On the device, this library is dependant on the[JSONEncoder](https://github.com/electricimp/JSONEncoder) library.  If used on the device please also add** `#require "JSONEncoder.class.nut:1.0.0"` **to the top of your device code.**
 
 ## Class Usage
 
