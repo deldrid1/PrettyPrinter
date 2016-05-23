@@ -13,7 +13,7 @@ class PrettyPrinter {
      * @param {boolean} truncate - Whether or not to truncate long output (can
      * also be set when print is called)
      */
-    function constructor(indentStr = null, truncate=true) {
+    function constructor(indentStr = null, truncate) {
         _indentStr = (indentStr == null) ? "    " : indentStr;
         _truncate = truncate;
 
