@@ -1,11 +1,5 @@
-/**
- * Class for pretty-printing squirrel objects
- * @author Jaye Heffernan <jaye@mysticpants.com>
- * @version 0.0.0
- */
+/** Class for pretty-printing squirrel objects */
 class PrettyPrinter {
-    static version = [0, 0, 0];
-
     _indentStr = null;
     _truncate = null;
     _encode = null;
@@ -43,13 +37,6 @@ class PrettyPrinter {
         local prev = null; // Previous character
         local inQuotes = false; // Are we inside a pair of quotes?
         
-        // Adds the required indentation to the current (empty) line
-        local indent = function() {
-            for (local i = 0; i < pos; i++) {
-                r += _indentStr;
-            }
-        }
-        
         foreach (char in json) {
             if (char == '"' && prev != '\\') {
                 // End of quoted string
@@ -57,23 +44,21 @@ class PrettyPrinter {
                 
             } else if((char == '}' || char == ']') && !inQuotes) {
                 // End of an object, dedent
-                r += "\n";
                 pos--;
-                indent();
+                // Move to the next line and add indentation
+                r += "\n" + _repeat(_indentStr, pos);
             }
             
             // Push the current character
             r += char.tochar();
             
             if ((char == ',' || char == '{' || char == '[') && !inQuotes) {
-                r += "\n";
-                
                 if (char == '{' || char == '[') {
                     // Start of an object, indent further
                     pos++;
                 }
-                
-                indent();
+                // Move to the next line and add indentation
+                r += "\n" + _repeat(_indentStr, pos);
             }
      
             prev = char;
@@ -112,7 +97,7 @@ class PrettyPrinter {
     /**
      * Forceably logs a string to the server by logging one line at a time
      * 
-     * This curcumvents then log's truncation, but messages may still be
+     * This circumvents then log's truncation, but messages may still be
      * throttled if string is too long
      * @param {string} string - String to log
      * @param {number max - Maximum number of lines to log
@@ -124,5 +109,18 @@ class PrettyPrinter {
             }
             server.log(line);
         }
+    }
+    /**
+     * Repeats a string a given number of times
+     *
+     * @returns {string} repeated - a string made of the input string repeated 
+     * the given number of times
+     */
+    static function _repeat(string, times) {
+        local r = "";
+        for (local i = 0; i < times; i++) {
+            r += string;
+        }
+        return r;
     }
 }
