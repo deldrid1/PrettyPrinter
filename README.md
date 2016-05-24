@@ -2,7 +2,7 @@
 
 This library ‘pretty prints’ Squirrel objects.
 
-On the device, this library is dependent on the [JSONEncoder library](https://github.com/electricimp/JSONEncoder). The agent code makes use of the imp API’s own JSON encoder. How you include the library depends on whether you are using it in agent or device code.
+On the device, this library is dependent on the [JSONEncoder library](https://github.com/electricimp/JSONEncoder). Under an agent, the library makes use of the imp API’s own JSON encoder. How you include the library depends on whether you are using it in agent or device code.
 
 ### Agent Code
 
