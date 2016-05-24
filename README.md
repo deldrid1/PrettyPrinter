@@ -1,14 +1,22 @@
 # Squirrel Pretty Printer
 
-This library pretty-prints Squirrel objects.
+This library ‘pretty prints’ Squirrel objects.
 
-**To add this library to your project, add** `#require "PrettyPrinter.class.nut:1.0.0"` **to the top of your code.  On the device, this library is dependant on the [JSONEncoder](https://github.com/electricimp/JSONEncoder) library.  If used on the device also add** `#require "JSONEncoder.class.nut:1.0.0"` **to the top of your device code.**
+On the device, this library is dependent on the [JSONEncoder library](https://github.com/electricimp/JSONEncoder). How you include the library depends on whether you are using it in agent or device code.
+
+### Agent Code
+
+**To add this library to your project, add** `#require "PrettyPrinter.class.nut:1.0.0"` **to the top of your agent code**.
+
+### Device Code
+
+**To add this library to your project, add** `#require "PrettyPrinter.class.nut:1.0.0"` **and** `#require "JSONEncoder.class.nut:1.0.0"` **to the top of your device code**.
 
 ## Class Usage
 
-### Constructor: PrettyPrinter(*[indentStr, truncate]*)
+### Constructor: PrettyPrinter(*[indentString, truncate]*)
 
-The PrettyPrinter constructor takes two optional parameters: a string *indentStr*, containing level of indentation and a boolean *truncate*, the default setting for whether a long log output should be truncated.  The default value for *indentStr* is a string containing four spaces.  The default value of *truncate* is true.
+The PrettyPrinter constructor takes two optional parameters: a string *indentString* containing the level of indentation you require, and a boolean, *truncate*, which lets you select whether a long log output should be truncated. The default value for *indentString* is a string containing four spaces. The default value of *truncate* is `true`.
 
 ```squirrel
 pp <- PrettyPrinter();
@@ -16,9 +24,11 @@ pp <- PrettyPrinter();
 
 ## Class Methods
 
-### format(*obj*)
+### format(*squirrelObject*)
 
-The *format* method takes one required parameter, the Squirrel object to be formatted, and returns a string containing the prettifed JSON-encoded version of object.  PLEASE NOTE when formatting classes or instances functions will be omitted from the output, as they are not currently supported by JSONEncoder.
+The *format()* method takes one required parameter: the Squirrel object to be formatted. It returns a string containing the prettifed JSON-encoded version of object.
+
+**Note** When formatting classes or instances, functions will be omitted from the output as they are not currently supported by JSONEncoder.
 
 ```squirrel
 array <- [1,2,3,4,5];
@@ -28,17 +38,17 @@ multiline,
 
 string
 
-    with indentation"
+    with indentation";
 
 myData <- {
     "key": "value",
     "array": array,
     "string": string
-}
+};
 
 prettyJSON <- pp.format(myData);
 
-/* returns this string
+/* returns this multiline string:
 {
      "array": [
          1,
@@ -55,7 +65,7 @@ prettyJSON <- pp.format(myData);
 
 ### print(*obj [, truncate]*)
 
-The *print* method formats a Squirrel object using the PrettyPrint format method and prints the formatted string.  This method takes one required parameter, the Squirrel object to be formatted and printed, and one optional boolean parameter *truncate*.  If *truncate* is not passed in it will fall back to the default set in the constructor.   If `truncate` is set to true, `server.log` will be called on the formatted string and the output may be truncated.  If `truncate` is set to false, `server.log` is called on each line of the formatted string seperately avoiding truncation, although the string may still be subject to message throttling for very long output.
+The *print()* method formats a Squirrel object using the *format()* method and prints the formatted string. This method takes one required parameter: the Squirrel object to be formatted and printed, and one optional boolean parameter, *truncate*. If *truncate* is not passed in, it will fall back to the default set in the constructor. If *truncate* is set to `true`, **server.log()** will be called on the formatted string and the output may be truncated.  If *truncate* is set to `false`, **server.log()** is called on each line of the formatted string separately, avoiding truncation, although the string may still be subject to message throttling for very long output.
 
 ```squirrel
 // Print myData and do not truncate
