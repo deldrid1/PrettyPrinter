@@ -82,6 +82,6 @@ would like to try.  Then run it with:
 TestRunner().run();
 ```
 
-## Licence
+## License
 
 The PrettyPrint library is licensed under [MIT License](./LICENSE.txt).
