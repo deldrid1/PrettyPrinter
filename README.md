@@ -4,11 +4,11 @@ This library ‘pretty prints’ Squirrel objects.
 
 On the device, this library is dependent on the [JSONEncoder library](https://github.com/electricimp/JSONEncoder). Under an agent, the library makes use of the imp API’s own JSON encoder. How you include the library depends on whether you are using it in agent or device code.
 
-### Agent Code
+#### Agent Code
 
 **To add this library to your project, add** `#require "PrettyPrinter.class.nut:1.0.0"` **to the top of your agent code**.
 
-### Device Code
+#### Device Code
 
 **To add this library to your project, add** `#require "PrettyPrinter.class.nut:1.0.0"` **and** `#require "JSONEncoder.class.nut:1.0.0"` **to the top of your device code**.
 
