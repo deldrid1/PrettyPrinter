@@ -106,7 +106,6 @@ class PrettyPrinter {
         
         while (i < len) {
             char = json[i];
-        // foreach (char in json) {
             if (char == '"' && prev != '\\') {
                 // End of quoted string
                 inQuotes = !inQuotes;
@@ -128,7 +127,7 @@ class PrettyPrinter {
                 }
                 // Move to the next line and add indentation
                 r += "\n" + _repeat(_indentStr, pos);
-                // skip the next character, it is a space added by the json encoder
+                // Skip the next character, it is a space added by the json encoder
                 i++;
             }
      
