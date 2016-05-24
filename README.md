@@ -63,7 +63,7 @@ prettyJSON <- pp.format(myData);
 */
 ```
 
-### print(*obj [, truncate]*)
+### print(*squirrelObject[, truncate]*)
 
 The *print()* method formats a Squirrel object using the *format()* method and prints the formatted string. This method takes one required parameter: the Squirrel object to be formatted and printed, and one optional boolean parameter, *truncate*. If *truncate* is not passed in, it will fall back to the default set in the constructor. If *truncate* is set to `true`, **server.log()** will be called on the formatted string and the output may be truncated.  If *truncate* is set to `false`, **server.log()** is called on each line of the formatted string separately, avoiding truncation, although the string may still be subject to message throttling for very long output.
 
