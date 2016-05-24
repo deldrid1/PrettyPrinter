@@ -32,12 +32,21 @@ class PrettyPrinter {
      * @param {string} json - JSON encoded string
      */
     function _prettify(json) {
-        local r = ""; // Result string
-        local pos = 0; // Level of indentation
+        local i = 0; // Position in the input string
+        local pos = 0; // Current level of indentation
+        
+        local char = null; // Current character
         local prev = null; // Previous character
+        
         local inQuotes = false; // Are we inside a pair of quotes?
         
-        foreach (char in json) {
+        local r = ""; // Result string
+        
+        local len = json.len();
+        
+        while (i < len) {
+            char = json[i];
+        // foreach (char in json) {
             if (char == '"' && prev != '\\') {
                 // End of quoted string
                 inQuotes = !inQuotes;
@@ -59,9 +68,12 @@ class PrettyPrinter {
                 }
                 // Move to the next line and add indentation
                 r += "\n" + _repeat(_indentStr, pos);
+                // skip the next character, it is a space added by the json encoder
+                i++;
             }
      
             prev = char;
+            i++;
         }
         
         return r;
