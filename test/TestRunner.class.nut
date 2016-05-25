@@ -14,11 +14,11 @@ class TestRunner {
         char = 'A';
         
         string = @"I am a big string,
-        With Multiple lines...
+With Multiple lines...
         
-        ""A quote"" - someone
+""A quote"" - someone
         
-            some indentation too."
+    some indentation too."
             
         table = {
             "key1": "value1",
@@ -64,8 +64,8 @@ class TestRunner {
     function run() {
         server.log("RUNNING TESTS");
         
+        // PP.print(array);
         // PP.print(nested);
-        PP.print(nested, false);
         // PP.print(deepNested)
         // PP.print(deepNested, false);
         
