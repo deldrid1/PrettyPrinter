@@ -6,11 +6,11 @@ On the device, this library is dependent on the [JSONEncoder library](https://gi
 
 #### Agent Code
 
-**To add this library to your project, add** `#require "PrettyPrinter.class.nut:1.0.0"` **to the top of your agent code**.
+**To add this library to your project, add** `#require "PrettyPrinter.class.nut:1.0.1"` **to the top of your agent code**.
 
 #### Device Code
 
-**To add this library to your project, add** `#require "PrettyPrinter.class.nut:1.0.0"` **and** `#require "JSONEncoder.class.nut:1.0.0"` **to the top of your device code**.
+**To add this library to your project, add** `#require "PrettyPrinter.class.nut:1.0.1"` **and** `#require "JSONEncoder.class.nut:1.0.0"` **to the top of your device code**.
 
 ## Class Usage
 
