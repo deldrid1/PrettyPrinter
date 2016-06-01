@@ -1,7 +1,7 @@
 /** Class for pretty-printing squirrel objects */
 class PrettyPrinter {
 
-    static version = [1, 0, 0];
+    static version = [1, 0, 1];
 
     _indentStr = null;
     _truncate = null;
@@ -106,6 +106,7 @@ class PrettyPrinter {
         
         while (i < len) {
             char = json[i];
+            
             if (char == '"' && prev != '\\') {
                 // End of quoted string
                 inQuotes = !inQuotes;
@@ -115,6 +116,12 @@ class PrettyPrinter {
                 pos--;
                 // Move to the next line and add indentation
                 r += "\n" + _repeat(_indentStr, pos);
+                
+            } else if (char == ' ' && !inQuotes) {
+                // Skip any spaces added by the JSON encoder
+                i++;
+                continue;
+                
             }
             
             // Push the current character
@@ -127,8 +134,9 @@ class PrettyPrinter {
                 }
                 // Move to the next line and add indentation
                 r += "\n" + _repeat(_indentStr, pos);
-                // Skip the next character, it is a space added by the json encoder
-                i++;
+            } else if (char == ':' && !inQuotes) {
+                // Add a space between table keys and values
+                r += " ";
             }
      
             prev = char;
