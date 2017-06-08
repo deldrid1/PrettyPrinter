@@ -1,7 +1,7 @@
 /** Class for pretty-printing squirrel objects */
 class PrettyPrinter {
 
-    static version = [1, 0, 1];
+    //static version = [1, 0, 2];
 
     _indentStr = null;
     _truncate = null;
@@ -37,8 +37,8 @@ class PrettyPrinter {
      * @param {*} obj - A squirrel object
      * @returns {string} json - A pretty JSON string
      */
-    function format(obj) {
-        return _prettify(_encode(obj));
+    function format(obj, maxIndentation = 999) {
+        return _prettify(_encode(obj), maxIndentation);
     }
 
     /**
@@ -49,9 +49,9 @@ class PrettyPrinter {
      * @param {boolean} truncate - Whether to truncate long output (defaults to
      * the instance-level configuration set in the constructor)
      */
-    function print(obj, truncate=null) {
+    function print(obj, truncate=null, maxIndentation = 999) {
         truncate = (truncate == null) ? _truncate : truncate;
-        local pretty = this.format(obj);
+        local pretty = this.format(obj, maxIndentation);
         (truncate)
             ? server.log(pretty)
             : _forceLog(pretty);
@@ -91,7 +91,7 @@ class PrettyPrinter {
      * Prettifies some JSON
      * @param {string} json - JSON encoded string
      */
-    function _prettify(json) {
+    function _prettify(json, maxIndentation = 999) {
         local i = 0; // Position in the input string
         local pos = 0; // Current level of indentation
         
@@ -114,8 +114,9 @@ class PrettyPrinter {
             } else if((char == '}' || char == ']') && !inQuotes) {
                 // End of an object, dedent
                 pos--;
-                // Move to the next line and add indentation
-                r += "\n" + _repeat(_indentStr, pos);
+                if(pos < maxIndentation) {
+                    r += "\r\n" + _repeat(_indentStr, pos);
+                }
                 
             } else if (char == ' ' && !inQuotes) {
                 // Skip any spaces added by the JSON encoder
@@ -132,8 +133,11 @@ class PrettyPrinter {
                     // Start of an object, indent further
                     pos++;
                 }
-                // Move to the next line and add indentation
-                r += "\n" + _repeat(_indentStr, pos);
+                if(pos <= maxIndentation){
+                    // Move to the next line and add indentation
+                    r += "\r\n" + _repeat(_indentStr, pos);
+                }
+                
             } else if (char == ':' && !inQuotes) {
                 // Add a space between table keys and values
                 r += " ";
