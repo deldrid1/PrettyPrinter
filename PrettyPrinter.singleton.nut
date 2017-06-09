@@ -90,7 +90,7 @@ PrettyPrinter <- {
                 // End of an object, dedent
                 pos--;
                 if(pos < maxIndentation) {
-                    r += "\r\n" + _repeat(_indentStr, pos);
+                    r += "\n" + _repeat(_indentStr, pos);
                 }
                 
             } else if (char == ' ' && !inQuotes) {
@@ -110,7 +110,7 @@ PrettyPrinter <- {
                 }
                 if(pos <= maxIndentation){
                     // Move to the next line and add indentation
-                    r += "\r\n" + _repeat(_indentStr, pos);
+                    r += "\n" + _repeat(_indentStr, pos);
                 }
                 
             } else if (char == ':' && !inQuotes) {
